@@ -1,9 +1,25 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:load/load.dart';
 
 void main() {
   runApp(
     LoadingProvider(
+      // loadingWidgetBuilder: (ctx, data) {
+      //   return Center(
+      //     child: SizedBox(
+      //       width: 30,
+      //       height: 30,
+      //       child: Container(
+      //         child: CupertinoActivityIndicator(),
+      //         color: Colors.blue,
+      //       ),
+      //     ),
+      //   );
+      // },
+      themeData: LoadingThemeData(
+        tapDismiss: false,
+      ),
       child: MyApp(),
     ),
   );
@@ -37,7 +53,6 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   void initState() {
     super.initState();
-    print("MyHomePage init state");
     showLoadingDialog();
   }
 
