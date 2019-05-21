@@ -1,5 +1,7 @@
 # load
 
+[![pub package](https://img.shields.io/pub/v/load.svg)](https://pub.dartlang.org/packages/load) [![GitHub](https://img.shields.io/github/license/Caijinglong/flutter_load_widget.svg)](https://github.com/caijinglong/flutter_load_widget)
+
 Global loading widget, which can be used through simple configuration.
 
 Pure flutter library, not use native code.
@@ -23,9 +25,11 @@ It is similar to [OKToast](https://pub.dev/packages/oktoast) in use.
 
 Add to yaml
 
+version is ![pub package](https://img.shields.io/pub/v/load.svg)
+
 ```yaml
 dependencies:
-  load: 0.1.0
+  load: $latest_version
 ```
 
 - import

@@ -1,8 +1,8 @@
 name: load
 description: Global loading widget, Pure flutter library, not use native code. It is similar to OKToast in use.
-version: 0.1.0
+version: 0.1.1
 author: caijinglong<cjl_spy@163.com>
-homepage: https://github.com/caijinglong
+homepage: https://github.com/caijinglong/flutter_load_widget
 
 environment:
   sdk: '>=2.1.0 <3.0.0'
