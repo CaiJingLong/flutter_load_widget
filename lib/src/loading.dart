@@ -16,7 +16,7 @@ class LoadingWidget extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  _LoadingWidgetState createState() => _LoadingWidgetState();
+  LoadingWidgetState createState() => LoadingWidgetState();
 
   static Widget buildDefaultLoadingWidget(
     BuildContext context,
@@ -31,6 +31,7 @@ class LoadingWidget extends StatefulWidget {
           height: data.loadingSize.height,
           decoration: BoxDecoration(
             color: data.loadingBackgroundColor,
+            borderRadius: data.borderRadius,
           ),
           padding: data.loadingPadding,
           child: CircularProgressIndicator(),
@@ -41,7 +42,7 @@ class LoadingWidget extends StatefulWidget {
   }
 }
 
-class _LoadingWidgetState extends State<LoadingWidget> {
+class LoadingWidgetState extends State<LoadingWidget> {
   bool show = false;
 
   @override
@@ -77,15 +78,16 @@ class _LoadingWidgetState extends State<LoadingWidget> {
       w = GestureDetector(
         child: w,
         behavior: HitTestBehavior.translucent,
-        onTap: () {
-          setState(() {
-            show = false;
-          });
-          Future.delayed(data.animDuration, hideLoadingDialog);
-        },
+        onTap: hideLoadingDialog,
       );
     }
 
     return w;
+  }
+
+  void dismissAnim() {
+    setState(() {
+      show = false;
+    });
   }
 }

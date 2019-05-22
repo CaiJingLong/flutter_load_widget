@@ -27,6 +27,8 @@ class LoadingThemeData {
   final Size loadingSize;
   final Duration animDuration;
 
+  final BorderRadiusGeometry borderRadius;
+
   const LoadingThemeData.raw(
     this.backgroundColor,
     this.loadingBackgroundColor,
@@ -34,6 +36,7 @@ class LoadingThemeData {
     this.loadingSize,
     this.tapDismiss,
     this.animDuration,
+    this.borderRadius,
   );
 
   factory LoadingThemeData({
@@ -43,6 +46,8 @@ class LoadingThemeData {
     Size loadingSize = const Size(55, 55),
     bool tapDismiss = true,
     Duration animDuration = const Duration(milliseconds: 300),
+    BorderRadiusGeometry borderRadius =
+        const BorderRadius.all(Radius.circular(8)),
   }) {
     return LoadingThemeData.raw(
       backgroundColor,
@@ -51,6 +56,7 @@ class LoadingThemeData {
       loadingSize,
       tapDismiss,
       animDuration,
+      borderRadius,
     );
   }
 }

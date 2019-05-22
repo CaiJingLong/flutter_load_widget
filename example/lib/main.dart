@@ -5,21 +5,9 @@ import 'package:load/load.dart';
 void main() {
   runApp(
     LoadingProvider(
-      // loadingWidgetBuilder: (ctx, data) {
-      //   return Center(
-      //     child: SizedBox(
-      //       width: 30,
-      //       height: 30,
-      //       child: Container(
-      //         child: CupertinoActivityIndicator(),
-      //         color: Colors.blue,
-      //       ),
-      //     ),
-      //   );
-      // },
       themeData: LoadingThemeData(
-        tapDismiss: false,
-      ),
+          // tapDismiss: false,
+          ),
       child: MyApp(),
     ),
   );
@@ -53,15 +41,22 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   void initState() {
     super.initState();
-    showLoadingDialog();
+    showAndDelayDismiss();
   }
 
   void _incrementCounter() {
     setState(() {
       _counter++;
     });
+    showAndDelayDismiss();
+  }
 
-    showLoadingDialog();
+  void showAndDelayDismiss(
+      [Duration duration = const Duration(seconds: 2)]) async {
+    var future = await showLoadingDialog();
+    Future.delayed(duration, () {
+      future.dismiss();
+    });
   }
 
   @override

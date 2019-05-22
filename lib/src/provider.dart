@@ -1,5 +1,9 @@
+import 'dart:async';
+
+import 'package:async/async.dart';
 import 'package:flutter/material.dart';
 
+import 'dismiss_future.dart';
 import 'loading.dart';
 import 'theme.dart';
 
@@ -33,7 +37,9 @@ class LoadingProvider extends StatefulWidget {
 class _LoadingProviderState extends State<LoadingProvider> {
   GlobalKey<OverlayState> overlayKey = GlobalKey();
 
-  OverlayEntry entry;
+  GlobalKey<LoadingWidgetState> loadingKey = GlobalKey();
+
+  CancelableOperation dismissCancelOperation;
 
   @override
   void initState() {
@@ -64,12 +70,13 @@ class _LoadingProviderState extends State<LoadingProvider> {
     super.dispose();
   }
 
-  void showLoading() {
-    this.entry?.remove();
+  LoadingDismissFuture showLoading() {
+    _realDismissDialog();
     var themeData = widget.themeData ?? LoadingThemeData();
     var w = LoadingTheme(
       data: themeData,
       child: LoadingWidget(
+        key: loadingKey,
         loadingWidgetBuilder: widget.loadingWidgetBuilder,
       ),
     );
@@ -79,29 +86,40 @@ class _LoadingProviderState extends State<LoadingProvider> {
 
     overlayKey.currentState.insert(entry);
 
-    this.entry = entry;
+    var future = LoadingDismissFuture(entry, themeData.animDuration);
+    return future;
   }
 
-  void hideLoading() {
-    entry?.remove();
-    entry = null;
+  void _realDismissDialog() {
+    FutureManager.getInstance().dismissAll(false);
+  }
+
+  void dismissLoading() {
+    _realDismissDialog();
   }
 }
 
-showLoadingDialog() {
+/// Use [LoadingDismissFuture.dismiss] can dismiss current dialog
+Future<LoadingDismissFuture> showLoadingDialog() {
+  print("show loading dialog");
+  var c = Completer<LoadingDismissFuture>();
   Future.delayed(Duration.zero, () {
     if (_keys.isNotEmpty) {
       var key = _keys.first;
-      key.currentState.showLoading();
+      c.complete(key.currentState.showLoading());
     }
   });
+  return c.future;
 }
 
-hideLoadingDialog() {
+/// will dismiss all dialog
+void hideLoadingDialog() {
+  print("hideLoadingDialog");
   Future.delayed(Duration.zero, () {
     if (_keys.isNotEmpty) {
       var key = _keys.first;
-      key.currentState.hideLoading();
+      key?.currentState?.loadingKey?.currentState?.dismissAnim();
+      key.currentState.dismissLoading();
     }
   });
 }
