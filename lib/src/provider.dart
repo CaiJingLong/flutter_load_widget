@@ -86,7 +86,8 @@ class _LoadingProviderState extends State<LoadingProvider> {
 
     overlayKey.currentState.insert(entry);
 
-    var future = LoadingDismissFuture(entry, themeData.animDuration);
+    var future =
+        LoadingDismissFuture(entry, loadingKey, themeData.animDuration);
     return future;
   }
 

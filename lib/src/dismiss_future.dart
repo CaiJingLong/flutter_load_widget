@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 
+import 'loading.dart';
+
 class LoadingDismissFuture {
   final OverlayEntry entry;
   Duration animDuration;
   bool isRemove = false;
+  GlobalKey<LoadingWidgetState> loadingKey;
 
-  LoadingDismissFuture(this.entry, this.animDuration) {
+  LoadingDismissFuture(this.entry, this.loadingKey, this.animDuration) {
     FutureManager.getInstance().futures.add(this);
   }
 
@@ -28,6 +31,7 @@ class LoadingDismissFuture {
     }
     isRemove = true;
     FutureManager.getInstance().futures.remove(this);
+    loadingKey.currentState.dismissAnim();
     Future.delayed(animDuration, entry.remove);
   }
 }
