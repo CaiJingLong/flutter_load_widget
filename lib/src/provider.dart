@@ -1,6 +1,4 @@
 import 'dart:async';
-
-import 'package:async/async.dart';
 import 'package:flutter/material.dart';
 
 import 'dismiss_future.dart';
@@ -38,8 +36,6 @@ class _LoadingProviderState extends State<LoadingProvider> {
   GlobalKey<OverlayState> overlayKey = GlobalKey();
 
   GlobalKey<LoadingWidgetState> loadingKey = GlobalKey();
-
-  CancelableOperation dismissCancelOperation;
 
   @override
   void initState() {
