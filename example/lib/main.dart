@@ -65,28 +65,8 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         title: Text(widget.title),
         actions: <Widget>[
-          IconButton(
-            icon: Icon(Icons.call),
-            onPressed: () {
-              showCustomLoadingWidget(
-                Center(
-                  child: Container(
-                    padding: const EdgeInsets.all(30),
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: <Widget>[
-                        LinearProgressIndicator(),
-                        Container(
-                          height: 10,
-                        ),
-                        Text("加载中"),
-                      ],
-                    ),
-                  ),
-                ),
-              );
-            },
-          ),
+          buildCustomLoadingButton(),
+          buildTouchLoadingDialog(),
         ],
       ),
       body: Center(
@@ -108,6 +88,71 @@ class _MyHomePageState extends State<MyHomePage> {
         tooltip: 'Increment',
         child: Icon(Icons.add),
       ),
+    );
+  }
+
+  Widget buildCustomLoadingButton() {
+    return IconButton(
+      icon: Icon(Icons.cloud_download),
+      onPressed: () {
+        showCustomLoadingWidget(
+          Center(
+            child: Container(
+              padding: const EdgeInsets.all(30),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: <Widget>[
+                  LinearProgressIndicator(),
+                  Container(
+                    height: 10,
+                  ),
+                  Text("loading"),
+                ],
+              ),
+            ),
+          ),
+        );
+      },
+    );
+  }
+
+  Widget buildTouchLoadingDialog() {
+    return IconButton(
+      icon: Icon(Icons.touch_app),
+      onPressed: () {
+        showCustomLoadingWidget(
+          Center(
+            child: Container(
+              padding: const EdgeInsets.all(30),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: <Widget>[
+                  Container(
+                    width: 40,
+                    height: 40,
+                    color: Colors.blue,
+                    child: CupertinoActivityIndicator(
+                      radius: 10,
+                    ),
+                  ),
+                  Container(
+                    height: 10,
+                  ),
+                  FlatButton(
+                    color: Colors.white,
+                    child: Text("Add"),
+                    onPressed: () {
+                      _counter++;
+                      setState(() {});
+                      print("touch Add button, this counter is :$_counter");
+                    },
+                  ),
+                ],
+              ),
+            ),
+          ),
+        );
+      },
     );
   }
 }
