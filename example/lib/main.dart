@@ -64,6 +64,30 @@ class _MyHomePageState extends State<MyHomePage> {
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
+        actions: <Widget>[
+          IconButton(
+            icon: Icon(Icons.call),
+            onPressed: () {
+              showCustomLoadingWidget(
+                Center(
+                  child: Container(
+                    padding: const EdgeInsets.all(30),
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: <Widget>[
+                        LinearProgressIndicator(),
+                        Container(
+                          height: 10,
+                        ),
+                        Text("加载中"),
+                      ],
+                    ),
+                  ),
+                ),
+              );
+            },
+          ),
+        ],
       ),
       body: Center(
         child: Column(

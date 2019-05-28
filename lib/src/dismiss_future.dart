@@ -12,14 +12,6 @@ class LoadingDismissFuture {
     FutureManager.getInstance().futures.add(this);
   }
 
-  void _realRemove() {
-    if (isRemove) {
-      return;
-    }
-    isRemove = true;
-    entry.remove();
-  }
-
   void dismiss([bool now = false]) {
     if (isRemove) {
       return;

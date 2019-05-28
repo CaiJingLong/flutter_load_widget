@@ -62,6 +62,7 @@ see example/lib/main.dart
 
 ```dart
 showLoadingDialog();
+showCustomLoadingWidget(Container()); // custom dialog
 hideLoadingDialog();
 ```
 

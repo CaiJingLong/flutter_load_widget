@@ -91,6 +91,27 @@ class _LoadingProviderState extends State<LoadingProvider> {
     return future;
   }
 
+  LoadingDismissFuture showLoadingWidget(Widget loadingWidget) {
+    _realDismissDialog();
+    var themeData = widget.themeData ?? LoadingThemeData();
+    var w = LoadingTheme(
+      data: themeData,
+      child: LoadingWidget(
+        key: loadingKey,
+        loadingWidgetBuilder: (_, __) => loadingWidget,
+      ),
+    );
+    var entry = OverlayEntry(builder: (BuildContext context) {
+      return w;
+    });
+
+    overlayKey.currentState.insert(entry);
+
+    var future =
+        LoadingDismissFuture(entry, loadingKey, themeData.animDuration);
+    return future;
+  }
+
   void _realDismissDialog() {
     FutureManager.getInstance().dismissAll(false);
   }
@@ -108,6 +129,17 @@ Future<LoadingDismissFuture> showLoadingDialog() {
     if (_keys.isNotEmpty) {
       var key = _keys.first;
       c.complete(key.currentState.showLoading());
+    }
+  });
+  return c.future;
+}
+
+Future<LoadingDismissFuture> showCustomLoadingWidget(Widget widget) {
+  var c = Completer<LoadingDismissFuture>();
+  Future.delayed(Duration.zero, () {
+    if (_keys.isNotEmpty) {
+      var key = _keys.first;
+      c.complete(key.currentState.showLoadingWidget(widget));
     }
   });
   return c.future;
