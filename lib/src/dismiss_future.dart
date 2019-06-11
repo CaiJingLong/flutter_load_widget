@@ -16,12 +16,12 @@ class LoadingDismissFuture {
     if (isRemove) {
       return;
     }
+    isRemove = true;
     if (now) {
       FutureManager.getInstance().futures.remove(this);
       entry.remove();
       return;
     }
-    isRemove = true;
     FutureManager.getInstance().futures.remove(this);
     loadingKey.currentState.dismissAnim();
     Future.delayed(animDuration, entry.remove);
