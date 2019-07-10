@@ -1,3 +1,9 @@
+## 0.1.4
+
+Add:
+
+- Add param tapDismiss for `showLoadingDialog` and `showCustomLoadingWidget`.
+
 ## 0.1.3
 
 fix:
