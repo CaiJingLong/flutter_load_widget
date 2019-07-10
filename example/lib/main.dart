@@ -65,6 +65,7 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         title: Text(widget.title),
         actions: <Widget>[
+          buildDefaultDialog(),
           buildCustomLoadingButton(),
           buildTouchLoadingDialog(),
         ],
@@ -111,6 +112,7 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
             ),
           ),
+          tapDismiss: false,
         );
       },
     );
@@ -152,6 +154,15 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
           ),
         );
+      },
+    );
+  }
+
+  Widget buildDefaultDialog() {
+    return IconButton(
+      icon: Icon(Icons.slideshow),
+      onPressed: () {
+        showLoadingDialog();
       },
     );
   }

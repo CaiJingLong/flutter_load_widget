@@ -59,4 +59,24 @@ class LoadingThemeData {
       borderRadius,
     );
   }
+
+  LoadingThemeData copyWith({
+    Color backgroundColor,
+    Color loadingBackgroundColor,
+    EdgeInsets loadingPadding,
+    Size loadingSize,
+    bool tapDismiss,
+    Duration animDuration,
+    BorderRadiusGeometry borderRadius,
+  }) {
+    return LoadingThemeData.raw(
+      backgroundColor ?? this.backgroundColor,
+      loadingBackgroundColor ?? this.loadingBackgroundColor,
+      loadingPadding ?? this.loadingPadding,
+      loadingSize ?? this.loadingSize,
+      tapDismiss ?? this.tapDismiss,
+      animDuration ?? this.animDuration,
+      borderRadius ?? this.borderRadius,
+    );
+  }
 }

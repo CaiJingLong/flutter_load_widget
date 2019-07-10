@@ -66,11 +66,13 @@ class _LoadingProviderState extends State<LoadingProvider> {
     super.dispose();
   }
 
-  LoadingDismissFuture showLoading() {
+  LoadingDismissFuture showLoading({bool tapDismiss = true}) {
     _realDismissDialog();
     var themeData = widget.themeData ?? LoadingThemeData();
     var w = LoadingTheme(
-      data: themeData,
+      data: themeData.copyWith(
+        tapDismiss: tapDismiss,
+      ),
       child: LoadingWidget(
         key: loadingKey,
         loadingWidgetBuilder: widget.loadingWidgetBuilder,
@@ -87,11 +89,16 @@ class _LoadingProviderState extends State<LoadingProvider> {
     return future;
   }
 
-  LoadingDismissFuture showLoadingWidget(Widget loadingWidget) {
+  LoadingDismissFuture showLoadingWidget(
+    Widget loadingWidget, {
+    bool tapDismiss = true,
+  }) {
     _realDismissDialog();
     var themeData = widget.themeData ?? LoadingThemeData();
     var w = LoadingTheme(
-      data: themeData,
+      data: themeData.copyWith(
+        tapDismiss: tapDismiss,
+      ),
       child: LoadingWidget(
         key: loadingKey,
         loadingWidgetBuilder: (_, __) => loadingWidget,
@@ -118,24 +125,29 @@ class _LoadingProviderState extends State<LoadingProvider> {
 }
 
 /// Use [LoadingDismissFuture.dismiss] can dismiss current dialog
-Future<LoadingDismissFuture> showLoadingDialog() {
+Future<LoadingDismissFuture> showLoadingDialog({
+  bool tapDismiss = true,
+}) {
   print("show loading dialog");
   var c = Completer<LoadingDismissFuture>();
   Future.delayed(Duration.zero, () {
     if (_keys.isNotEmpty) {
       var key = _keys.first;
-      c.complete(key.currentState.showLoading());
+      c.complete(key.currentState.showLoading(tapDismiss: tapDismiss));
     }
   });
   return c.future;
 }
 
-Future<LoadingDismissFuture> showCustomLoadingWidget(Widget widget) {
+Future<LoadingDismissFuture> showCustomLoadingWidget(
+  Widget widget, {
+  bool tapDismiss = true,
+}) {
   var c = Completer<LoadingDismissFuture>();
   Future.delayed(Duration.zero, () {
     if (_keys.isNotEmpty) {
       var key = _keys.first;
-      c.complete(key.currentState.showLoadingWidget(widget));
+      c.complete(key.currentState.showLoadingWidget(widget, tapDismiss: tapDismiss));
     }
   });
   return c.future;
