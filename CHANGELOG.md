@@ -1,3 +1,10 @@
+## 0.1.5
+
+Fix:
+
+- Fixed `tapDismiss` of the relationship between the method parameter and themeData parameter.
+  Priority `showLoadingDialog` method, the value of themeData is used when not specified in the method.
+
 ## 0.1.4
 
 Add:

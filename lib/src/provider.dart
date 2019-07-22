@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 
+import '../load.dart';
 import 'dismiss_future.dart';
 import 'loading.dart';
 import 'theme.dart';
@@ -91,10 +92,11 @@ class _LoadingProviderState extends State<LoadingProvider> {
 
   LoadingDismissFuture showLoadingWidget(
     Widget loadingWidget, {
-    bool tapDismiss = true,
+    bool tapDismiss,
   }) {
     _realDismissDialog();
     var themeData = widget.themeData ?? LoadingThemeData();
+    tapDismiss ??= themeData.tapDismiss;
     var w = LoadingTheme(
       data: themeData.copyWith(
         tapDismiss: tapDismiss,
@@ -116,19 +118,21 @@ class _LoadingProviderState extends State<LoadingProvider> {
   }
 
   void _realDismissDialog() {
+    LoadLogHelper.log("native dismiss loading.");
     FutureManager.getInstance().dismissAll(false);
   }
 
   void dismissLoading() {
+    LoadLogHelper.log("dismiss loading called.");
     _realDismissDialog();
   }
 }
 
 /// Use [LoadingDismissFuture.dismiss] can dismiss current dialog
 Future<LoadingDismissFuture> showLoadingDialog({
-  bool tapDismiss = true,
+  bool tapDismiss,
 }) {
-  print("show loading dialog");
+  LoadLogHelper.log("show loading dialog");
   var c = Completer<LoadingDismissFuture>();
   Future.delayed(Duration.zero, () {
     if (_keys.isNotEmpty) {
@@ -141,13 +145,17 @@ Future<LoadingDismissFuture> showLoadingDialog({
 
 Future<LoadingDismissFuture> showCustomLoadingWidget(
   Widget widget, {
-  bool tapDismiss = true,
+  bool tapDismiss,
 }) {
+  LoadLogHelper.log("show custom loading dialog");
   var c = Completer<LoadingDismissFuture>();
   Future.delayed(Duration.zero, () {
     if (_keys.isNotEmpty) {
       var key = _keys.first;
-      c.complete(key.currentState.showLoadingWidget(widget, tapDismiss: tapDismiss));
+      c.complete(key.currentState.showLoadingWidget(
+        widget,
+        tapDismiss: tapDismiss,
+      ));
     }
   });
   return c.future;
