@@ -166,4 +166,23 @@ class _MyHomePageState extends State<MyHomePage> {
       },
     );
   }
+
+  Widget exampleLoadApp() {
+    return LoadingProvider(
+      themeData: LoadingThemeData(),
+      loadingWidgetBuilder: (ctx, data) {
+        return Center(
+          child: SizedBox(
+            width: 30,
+            height: 30,
+            child: Container(
+              child: CupertinoActivityIndicator(),
+              color: Colors.blue,
+            ),
+          ),
+        );
+      },
+      child: MyApp(),
+    );
+  }
 }

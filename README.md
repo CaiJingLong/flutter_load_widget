@@ -9,11 +9,11 @@ Pure flutter library, not use native code.
 It is similar to [OKToast](https://pub.dev/packages/oktoast) in use.
 
 - [load](#load)
-  - [ScreenShot](#ScreenShot)
-  - [Usage](#Usage)
-  - [Advanced Usage](#Advanced-Usage)
-    - [Custom Loading Widget](#Custom-Loading-Widget)
-    - [Custom some config](#Custom-some-config)
+  - [ScreenShot](#screenshot)
+  - [Usage](#usage)
+  - [Advanced Usage](#advanced-usage)
+    - [Custom Loading Widget](#custom-loading-widget)
+    - [Custom some config](#custom-some-config)
 
 ## ScreenShot
 
@@ -74,13 +74,13 @@ Using `LoadingThemeData` and `loadingWidgetBuilder`
 
 ```dart
 LoadingProvider(
-  loadingWidgetBuilder: (ctx, data) {
   themeData: LoadingThemeData(),
-  return Center(
+  loadingWidgetBuilder: (ctx, data) {
+    return Center(
       child: SizedBox(
-      width: 30,
-      height: 30,
-      child: Container(
+        width: 30,
+        height: 30,
+        child: Container(
           child: CupertinoActivityIndicator(),
           color: Colors.blue,
         ),
@@ -88,7 +88,7 @@ LoadingProvider(
     );
   },
   child: MyApp(),
-),
+);
 ```
 
 ![image](https://i.loli.net/2019/05/21/5ce3acaed3a8d92031.png)
