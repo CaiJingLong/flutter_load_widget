@@ -163,7 +163,7 @@ Future<LoadingDismissFuture> showCustomLoadingWidget(
 
 /// will dismiss all dialog
 void hideLoadingDialog() {
-  Future.delayed(Duration.zero, () {
+  Future.delayed(Duration(milliseconds: 250), () {
     if (_keys.isNotEmpty) {
       var key = _keys.first;
       key?.currentState?.loadingKey?.currentState?.dismissAnim();
