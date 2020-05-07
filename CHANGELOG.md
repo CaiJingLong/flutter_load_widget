@@ -1,3 +1,9 @@
+## 0.1.6
+
+Fix:
+
+- fix dismissAnim error in fast hide loading.
+
 ## 0.1.5+1
 
 - Update readme.
