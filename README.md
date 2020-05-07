@@ -56,6 +56,20 @@ LoadingProvider(
 );
 ```
 
+Debug custom loading widget in **Flutter inspector**
+
+You can try to use next method to include the widget:
+
+```dart
+MaterialApp(
+  builder: (context, widget) {
+    return LoadingProvider(
+      child: widget,
+    );
+  },
+);
+```
+
 see example/lib/main.dart
 
 - show or hide dialog
