@@ -17,7 +17,7 @@ It is similar to [OKToast](https://pub.dev/packages/oktoast) in use.
 
 ## ScreenShot
 
-![Screenshot_2019-05-21-14-08-42-731_com.example.ex.png](https://raw.githubusercontent.com/kikt-blog/image/master/img/Screenshot_2019-05-21-14-08-42-731_com.example.ex.png)
+![Screenshot_2019-05-21-14-08-42-731_com.example.ex.png](https://cdn.jsdelivr.net/gh/kikt-blog/image/img/Screenshot_2019-05-21-14-08-42-731_com.example.ex.png)
 
 ## Usage
 
