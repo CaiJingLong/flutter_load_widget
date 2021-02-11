@@ -13,7 +13,7 @@ class LoadingTheme extends InheritedWidget {
 
   static LoadingThemeData of(BuildContext context) {
     final LoadingTheme result =
-        context.inheritFromWidgetOfExactType(LoadingTheme);
+        context.dependOnInheritedWidgetOfExactType<LoadingTheme>();
     return result?.data;
   }
 }
