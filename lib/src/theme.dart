@@ -3,8 +3,11 @@ import 'package:flutter/material.dart';
 class LoadingTheme extends InheritedWidget {
   final LoadingThemeData data;
 
-  const LoadingTheme({Key key, this.data, Widget child})
-      : super(child: child, key: key);
+  const LoadingTheme({
+    Key? key,
+    required this.data,
+    required Widget child,
+  }) : super(child: child, key: key);
 
   @override
   bool updateShouldNotify(InheritedWidget oldWidget) {
@@ -12,9 +15,9 @@ class LoadingTheme extends InheritedWidget {
   }
 
   static LoadingThemeData of(BuildContext context) {
-    final LoadingTheme result =
-        context.inheritFromWidgetOfExactType(LoadingTheme);
-    return result?.data;
+    final LoadingTheme? result =
+        context.dependOnInheritedWidgetOfExactType<LoadingTheme>();
+    return result?.data ?? LoadingThemeData();
   }
 }
 
@@ -61,13 +64,13 @@ class LoadingThemeData {
   }
 
   LoadingThemeData copyWith({
-    Color backgroundColor,
-    Color loadingBackgroundColor,
-    EdgeInsets loadingPadding,
-    Size loadingSize,
-    bool tapDismiss,
-    Duration animDuration,
-    BorderRadiusGeometry borderRadius,
+    Color? backgroundColor,
+    Color? loadingBackgroundColor,
+    EdgeInsets? loadingPadding,
+    Size? loadingSize,
+    bool? tapDismiss,
+    Duration? animDuration,
+    BorderRadiusGeometry? borderRadius,
   }) {
     return LoadingThemeData.raw(
       backgroundColor ?? this.backgroundColor,

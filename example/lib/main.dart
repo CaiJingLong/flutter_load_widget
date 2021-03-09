@@ -79,7 +79,7 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
             Text(
               '$_counter',
-              style: Theme.of(context).textTheme.display1,
+              style: Theme.of(context).textTheme.headline4,
             ),
           ],
         ),
@@ -108,6 +108,12 @@ class _MyHomePageState extends State<MyHomePage> {
                     height: 10,
                   ),
                   Text("loading"),
+                  TextButton(
+                    onPressed: () {
+                      hideLoadingDialog();
+                    },
+                    child: Text('dismiss'),
+                  ),
                 ],
               ),
             ),
@@ -140,8 +146,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   Container(
                     height: 10,
                   ),
-                  FlatButton(
-                    color: Colors.white,
+                  TextButton(
                     child: Text("Add"),
                     onPressed: () {
                       _counter++;

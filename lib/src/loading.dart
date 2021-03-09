@@ -11,8 +11,8 @@ class LoadingWidget extends StatefulWidget {
   final LoadingWidgetBuilder loadingWidgetBuilder;
 
   const LoadingWidget({
-    Key key,
-    this.loadingWidgetBuilder,
+    Key? key,
+    required this.loadingWidgetBuilder,
   }) : super(key: key);
 
   @override
@@ -63,16 +63,14 @@ class LoadingWidgetState extends State<LoadingWidget> {
     var data = LoadingTheme.of(context);
     Widget w = widget.loadingWidgetBuilder(context, data);
 
-    if (data.backgroundColor != null) {
-      w = AnimatedOpacity(
-        duration: data.animDuration,
-        opacity: show ? 1 : 0,
-        child: Container(
-          child: w,
-          color: data.backgroundColor,
-        ),
-      );
-    }
+    w = AnimatedOpacity(
+      duration: data.animDuration,
+      opacity: show ? 1 : 0,
+      child: Container(
+        child: w,
+        color: data.backgroundColor,
+      ),
+    );
 
     if (data.tapDismiss) {
       w = GestureDetector(

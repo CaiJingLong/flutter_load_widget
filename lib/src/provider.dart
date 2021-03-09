@@ -13,15 +13,15 @@ class LoadingProvider extends StatefulWidget {
 
   final LoadingThemeData themeData;
 
-  final Key key;
+  final GlobalKey<_LoadingProviderState> key;
 
   final LoadingWidgetBuilder loadingWidgetBuilder;
 
   LoadingProvider({
-    @required this.child,
-    this.themeData,
+    required this.child,
+    required this.themeData,
     this.loadingWidgetBuilder = LoadingWidget.buildDefaultLoadingWidget,
-    Key key,
+    Key? key,
   })  : key = createKey(),
         super(key: key);
 
@@ -67,9 +67,12 @@ class _LoadingProviderState extends State<LoadingProvider> {
     super.dispose();
   }
 
-  LoadingDismissFuture showLoading({bool tapDismiss = true}) {
+  LoadingDismissFuture showLoading({
+    bool? tapDismiss,
+  }) {
+    tapDismiss ??= true;
     _realDismissDialog();
-    var themeData = widget.themeData ?? LoadingThemeData();
+    var themeData = widget.themeData;
     var w = LoadingTheme(
       data: themeData.copyWith(
         tapDismiss: tapDismiss,
@@ -83,7 +86,7 @@ class _LoadingProviderState extends State<LoadingProvider> {
       return w;
     });
 
-    overlayKey.currentState.insert(entry);
+    overlayKey.currentState?.insert(entry);
 
     var future =
         LoadingDismissFuture(entry, loadingKey, themeData.animDuration);
@@ -92,10 +95,10 @@ class _LoadingProviderState extends State<LoadingProvider> {
 
   LoadingDismissFuture showLoadingWidget(
     Widget loadingWidget, {
-    bool tapDismiss,
+    bool? tapDismiss,
   }) {
     _realDismissDialog();
-    var themeData = widget.themeData ?? LoadingThemeData();
+    var themeData = widget.themeData;
     tapDismiss ??= themeData.tapDismiss;
     var w = LoadingTheme(
       data: themeData.copyWith(
@@ -110,7 +113,7 @@ class _LoadingProviderState extends State<LoadingProvider> {
       return w;
     });
 
-    overlayKey.currentState.insert(entry);
+    overlayKey.currentState?.insert(entry);
 
     var future =
         LoadingDismissFuture(entry, loadingKey, themeData.animDuration);
@@ -129,15 +132,15 @@ class _LoadingProviderState extends State<LoadingProvider> {
 }
 
 /// Use [LoadingDismissFuture.dismiss] can dismiss current dialog
-Future<LoadingDismissFuture> showLoadingDialog({
-  bool tapDismiss,
+Future<LoadingDismissFuture?> showLoadingDialog({
+  bool? tapDismiss,
 }) {
   LoadLogHelper.log("show loading dialog");
-  var c = Completer<LoadingDismissFuture>();
+  var c = Completer<LoadingDismissFuture?>();
   Future.delayed(Duration.zero, () {
     if (_keys.isNotEmpty) {
       var key = _keys.first;
-      c.complete(key.currentState.showLoading(tapDismiss: tapDismiss));
+      c.complete(key.currentState?.showLoading(tapDismiss: tapDismiss));
     }
   });
   return c.future;
@@ -145,14 +148,14 @@ Future<LoadingDismissFuture> showLoadingDialog({
 
 Future<LoadingDismissFuture> showCustomLoadingWidget(
   Widget widget, {
-  bool tapDismiss,
+  bool? tapDismiss,
 }) {
   LoadLogHelper.log("show custom loading dialog");
   var c = Completer<LoadingDismissFuture>();
   Future.delayed(Duration.zero, () {
     if (_keys.isNotEmpty) {
       var key = _keys.first;
-      c.complete(key.currentState.showLoadingWidget(
+      c.complete(key.currentState?.showLoadingWidget(
         widget,
         tapDismiss: tapDismiss,
       ));
@@ -166,8 +169,8 @@ void hideLoadingDialog() {
   Future.delayed(Duration.zero, () {
     if (_keys.isNotEmpty) {
       var key = _keys.first;
-      key?.currentState?.loadingKey?.currentState?.dismissAnim();
-      key.currentState.dismissLoading();
+      key.currentState?.loadingKey.currentState?.dismissAnim();
+      key.currentState?.dismissLoading();
     }
   });
 }
