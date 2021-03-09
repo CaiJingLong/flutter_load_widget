@@ -1,3 +1,7 @@
+## 1.0.0
+
+Null safety version.
+
 ## 0.1.6
 
 Fix:
