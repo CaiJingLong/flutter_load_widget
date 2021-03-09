@@ -23,26 +23,26 @@ class LoadingDismissFuture {
       return;
     }
     FutureManager.getInstance().futures.remove(this);
-    loadingKey?.currentState?.dismissAnim();
+    loadingKey.currentState?.dismissAnim();
     Future.delayed(animDuration, entry.remove);
   }
 }
 
 class FutureManager {
-  static FutureManager _instance;
+  static FutureManager? _instance;
 
   FutureManager._();
 
   factory FutureManager.getInstance() {
     _instance ??= FutureManager._();
-    return _instance;
+    return _instance!;
   }
 
   var futures = <LoadingDismissFuture>[];
 
   dismissAll([bool now = true]) {
     futures.toList().forEach((f) {
-      f?.dismiss(now);
+      f.dismiss(now);
     });
     futures.clear();
   }
