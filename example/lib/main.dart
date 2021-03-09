@@ -108,6 +108,12 @@ class _MyHomePageState extends State<MyHomePage> {
                     height: 10,
                   ),
                   Text("loading"),
+                  TextButton(
+                    onPressed: () {
+                      hideLoadingDialog();
+                    },
+                    child: Text('dismiss'),
+                  ),
                 ],
               ),
             ),
