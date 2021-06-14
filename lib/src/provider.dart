@@ -132,11 +132,11 @@ class _LoadingProviderState extends State<LoadingProvider> {
 }
 
 /// Use [LoadingDismissFuture.dismiss] can dismiss current dialog
-Future<LoadingDismissFuture?> showLoadingDialog({
+Future<LoadingDismissFuture> showLoadingDialog({
   bool? tapDismiss,
 }) {
   LoadLogHelper.log("show loading dialog");
-  var c = Completer<LoadingDismissFuture?>();
+  var c = Completer<LoadingDismissFuture>();
   Future.delayed(Duration.zero, () {
     if (_keys.isNotEmpty) {
       var key = _keys.first;
