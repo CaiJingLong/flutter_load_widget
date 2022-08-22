@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import '../load.dart';
 import 'dismiss_future.dart';
 import 'loading.dart';
-import 'theme.dart';
 
 List<GlobalKey<_LoadingProviderState>> _keys = [];
 
@@ -78,7 +77,6 @@ class _LoadingProviderState extends State<LoadingProvider> {
         tapDismiss: tapDismiss,
       ),
       child: LoadingWidget(
-        key: loadingKey,
         loadingWidgetBuilder: widget.loadingWidgetBuilder,
       ),
     );
